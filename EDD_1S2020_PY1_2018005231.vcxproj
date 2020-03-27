@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\PDCurses-3.8;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;C:\PDCurses-3.8\wincon</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -94,6 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);pdcurses.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -147,7 +150,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="colaFichas.cpp" />
     <ClCompile Include="EDD_1S2020_PY1_2018005231.cpp" />
+    <ClCompile Include="listaD.cpp" />
+    <ClCompile Include="listaDobleCircular.cpp" />
+    <ClCompile Include="listaSimplePJugador.cpp" />
+    <ClCompile Include="listaSimpleTotal.cpp" />
+    <ClCompile Include="nodo.cpp" />
+    <ClCompile Include="nodoFichaActual.cpp" />
+    <ClCompile Include="nodoPalabra.cpp" />
+    <ClCompile Include="nodoPuntos.cpp" />
+    <ClCompile Include="nodoFicha.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="colaFichas.h" />
+    <ClInclude Include="listaD.h" />
+    <ClInclude Include="listaDobleCircular.h" />
+    <ClInclude Include="listaSimplePJugador.h" />
+    <ClInclude Include="listaSimpleTotal.h" />
+    <ClInclude Include="nodo.h" />
+    <ClInclude Include="nodoFicha.h" />
+    <ClInclude Include="nodoFichaActual.h" />
+    <ClInclude Include="nodoPalabra.h" />
+    <ClInclude Include="nodoPuntos.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
