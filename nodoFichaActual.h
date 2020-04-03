@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "listaD.h"
+
 using namespace std;
 
 class nodoFichaActual
@@ -14,6 +14,6 @@ public:
 	nodoFichaActual* siguiente;
 	nodoFichaActual* anterior;
 	
-	friend class listaD;
+
 };
 

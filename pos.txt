@@ -1,0 +1,5 @@
+ digraph G { rankdir= LR;node0[label = "felicia"];node1[label = "alberto"];node2[label = "xarnold"];node3[label = "susy"];node4[label = "pepe"];node0->node1;
+node1->node2;
+node2->node3;
+node3->node4;
+}

@@ -14,8 +14,10 @@ public:
     colaFichas();
     void insertarPrimero(nodoFicha* n);
     nodoFicha* sacarUltimo();
-    nodoFicha* obtenerficha(int id);
+   /// nodoFicha* obtenerficha(int id);
     void ordenar();
     void imprimir();
+
+    void graficar();
 };
 

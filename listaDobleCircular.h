@@ -21,5 +21,6 @@ public:
     nodoPalabra* getPrimero();
     nodoPalabra* getUltimo();
     nodoPalabra* buscar(string palabra);
+    void graficar();
 };
 

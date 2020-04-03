@@ -1,4 +1,3 @@
-﻿  EDD_1S2020_PY1_2018005231.cpp
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(4,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(5,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+﻿  arbolBinario.cpp
+D:\Repositorios\EDD_1S2020_PY1_201800523\arbolBinario.cpp(71): warning C4715: 'arbolBinario::recorridoInsercion': no todas las rutas de acceso de control devuelven un valor
   EDD_1S2020_PY1_2018005231.vcxproj -> D:\Repositorios\EDD_1S2020_PY1_201800523\Debug\EDD_1S2020_PY1_2018005231.exe

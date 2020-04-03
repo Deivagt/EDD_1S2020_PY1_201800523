@@ -9,10 +9,8 @@ public:
 	int puntuacion;
 	char letra;
 	int cantidad;
-	int id;
 	
 	nodoFicha* siguiente;
-	
 	
 	friend class colaFichas;
 	
