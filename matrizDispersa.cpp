@@ -204,10 +204,12 @@ void matrizDispersa::graficar() {
 	string nodos = "";
 	string dir = "";
 	string rank = "";
+	string group = "";
 
 	while (auxiliar1 != NULL) {
 		auxiliar2 = auxiliar1;
 		rank = rank + "{rank = same;";
+
 		while (auxiliar2 != NULL)
 		{
 			
@@ -217,7 +219,7 @@ void matrizDispersa::graficar() {
 				rank = rank + nodos + "nodo" + "raiz" + ";";
 
 				nodos = nodos + "nodo" + "raiz" +
-					+"[label = \"" + auxiliar2->letra + "\"];\n";
+					+"[label = \"" + auxiliar2->letra + "\", group = 1];\n";
 
 				dir = dir + "nodo" + "raiz" + "->" +
 					"nodo" + "x" + to_string(auxiliar2->derecha->x) +
@@ -232,7 +234,7 @@ void matrizDispersa::graficar() {
 				rank = rank + "nodo" + "y" + to_string(auxiliar2->y) + ";";
 
 				nodos = nodos + "nodo" + "y" + to_string(auxiliar2->y) +
-					+"[label = \"" + auxiliar2->letra + "\"];\n";
+					+"[label = \"" + auxiliar2->letra + "\",  group = 1];\n";
 
 				dir = dir + "nodo"+"y" + to_string(auxiliar2->y) + "->" +
 					"nodo" + "x" + to_string(auxiliar2->derecha->x) + "y" + to_string(auxiliar2->derecha->y) +
@@ -240,7 +242,7 @@ void matrizDispersa::graficar() {
 
 				if (auxiliar2->abajo != NULL) {
 					dir = dir +"nodo"+ "y" + to_string(auxiliar2->y) + "->" +
-						 "y" + to_string(auxiliar2->abajo->y) +
+						 +"nodo"+"y" + to_string(auxiliar2->abajo->y) +
 						" [dir=\"both\"];\n";
 				}
 			}
@@ -248,7 +250,7 @@ void matrizDispersa::graficar() {
 				rank = rank + "nodo" + "x" + to_string(auxiliar2->x) + ";";
 
 				nodos = nodos + "nodo" + "x" + to_string(auxiliar2->x) +
-					+"[label = \"" + auxiliar2->letra + "\"];\n";
+					+"[label = \"" + auxiliar2->letra + "\", group = "+ to_string(auxiliar2->x + 2) +"];\n";
 
 				if (auxiliar2->derecha != NULL) {
 					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "->" +
@@ -263,7 +265,7 @@ void matrizDispersa::graficar() {
 			else {
 				rank = rank + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) + ";";
 				nodos = nodos + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) +
-					+"[label = \"" + auxiliar2->letra + "\"];\n";
+					+"[label = \"" + auxiliar2->letra + "\", group = " + to_string(auxiliar2->x + 2) + "];\n";
 				if (auxiliar2->derecha != NULL) {
 					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) + "->" +
 						"nodo" + "x" + to_string(auxiliar2->derecha->x) + "y" + to_string(auxiliar2->derecha->y) +
