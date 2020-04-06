@@ -21,7 +21,7 @@ public:
 	nodoMatriz* insertarColumna(nodoMatriz* n, nodoMatriz* encabezadoColumna);
 
 	void insertar(nodoMatriz* n);
-
+	void graficar();
 	void imprimir();
 
 };

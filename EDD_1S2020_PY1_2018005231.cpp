@@ -106,7 +106,17 @@ int main() {
 	listaFichasJ1->llenar(cola);
 	listaFichasJ2->llenar(cola);
 
-	inGameJ1();
+
+
+	nodoMatriz* nuevo = new nodoMatriz();
+	nuevo->letra = "M";
+	nuevo->x = 5;
+	nuevo->y = 5;
+	nuevo->multiplicador = 2;
+	tablero->insertar(nuevo);
+
+	tablero->graficar();
+	//inGameJ1();
 
 	endwin();
 
@@ -156,7 +166,8 @@ int main()
 }
 */
 void menuPrincipal() {
-
+	pntJ1 = 0;
+	pntJ2 = 0;
 	wclear(win);
 	refresh();
 
@@ -647,11 +658,13 @@ void iniJuego() {
 								listaFichasJ1->llenar(cola);
 								listaFichasJ2->llenar(cola);
 								inGameJ1();
+								menuPrincipal();
 							}
 							else if (num == 2) {
 								listaFichasJ1->llenar(cola);
 								listaFichasJ2->llenar(cola);
 								inGameJ2();
+								menuPrincipal();
 							}
 						}
 
@@ -777,8 +790,16 @@ void inGameJ1() {
 	while (true) {
 		int c = wgetch(win);
 
-		if (c == 55) {
-
+		if (c == 54) {
+			inGameJ2();
+			break;
+		}
+		else if (c == 56) {
+			nodoPuntos* ganador = new nodoPuntos();
+			ganador->nombre = nj2;
+			ganador->puntuacion = pntJ2;
+			listaScore->insertarPrimero(ganador);
+			menuPrincipal();
 			break;
 		}
 		else if (c == 8) {
@@ -878,29 +899,61 @@ void inGameJ1() {
 									mvwprintw(win, 13, 8, "N. Terminar Turno***");
 									wrefresh(win);
 									wmove(win, 112, 19);
+
+									while (true) {
+										int c = wgetch(win);
+										if (c == 110) { ///////////VALIDAR PALABRA Y TODO
+											bool validacion = validarInsercion(palabra, posX, posY, abajo, derecha);
 									
-										while (true) {
-											int c = wgetch(win);
-											if (c == 110) { ///////////VALIDAR PALABRA Y TODO
-												bool validacion = validarInsercion(palabra, posX, posY, abajo, derecha);
-
-												if (validacion == true) {
-													inGameJ2();
+											if (validacion == true) {
 												
+												for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+													palabra[indice] = toupper(palabra[indice]);
+													nodoFichaActual* fichaAhora = listaFichasJ1->primero;
+													while (fichaAhora != NULL) {
+														if ((char)fichaAhora->letra[0] == palabra[indice]) {
+															break;
+														}
+														fichaAhora = fichaAhora->siguiente;
+													}
+
+													pntJ1 = pntJ1 + fichaAhora->puntuacion;
+													nodoMatriz* nuevo = new nodoMatriz();
+													nuevo->letra = fichaAhora->letra;
+													nuevo->multiplicador = 1;
+													nuevo->x = posX;
+													nuevo->y = posY;
+
+													tablero->insertar(nuevo);
+													if (derecha == true && abajo == false) {
+														posX++;
+													}
+													else {
+														posY++;
+													}
+
+													fichaAhora->anterior->siguiente = fichaAhora->siguiente;
+													fichaAhora->siguiente->anterior = fichaAhora->anterior;
+													fichaAhora->siguiente == NULL;
+													fichaAhora->anterior == NULL;
+													
+
 												}
-
-												
-												
 												palabra = "";
 												posX = 0;
 												posY = 0;
 												abajo = false;
 												derecha = false;
-												break;
+												listaFichasJ1 = new listaD();
+												listaFichasJ1->llenar(cola);
+												inGameJ2();
 											}
+
+											break;
 										}
-										break;
-									
+									}
+									break;
+
 								}
 								else if (c == 100) {//Derecha
 									derecha = true;
@@ -915,25 +968,51 @@ void inGameJ1() {
 										int c = wgetch(win);
 										if (c == 110) { ///////////VALIDAR PALABRA Y TODO
 											bool validacion = validarInsercion(palabra, posX, posY, abajo, derecha);
-											/*
-											*
-											*
-											*
-											*
-											*
-											*
-											*/
-											
+								
 											if (validacion == true) {
+												
+												for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+													palabra[indice] = toupper(palabra[indice]);
+													nodoFichaActual* fichaAhora = listaFichasJ1->primero;
+													while (fichaAhora != NULL) {
+														if ((char)fichaAhora->letra[0] == palabra[indice]) {
+															break;
+														}
+														fichaAhora = fichaAhora->siguiente;
+													}
+
+													pntJ1 = pntJ1 + fichaAhora->puntuacion;
+													nodoMatriz* nuevo = new nodoMatriz();
+													nuevo->letra = fichaAhora->letra;
+													nuevo->multiplicador = 1;
+													nuevo->x = posX;
+													nuevo->y = posY;
+
+													tablero->insertar(nuevo);
+													if (derecha == true && abajo == false) {
+														posX++;
+													}
+													else {
+														posY++;
+													}
+
+													fichaAhora->anterior->siguiente = fichaAhora->siguiente;
+													fichaAhora->siguiente->anterior = fichaAhora->anterior;
+													fichaAhora->siguiente == NULL;
+													fichaAhora->anterior == NULL;
+												
+
+												}
+												palabra = "";
+												posX = 0;
+												posY = 0;
+												abajo = false;
+												derecha = false;
+												listaFichasJ1 = new listaD();
+												listaFichasJ1->llenar(cola);
 												inGameJ2();
 											}
-											
 
-											palabra = "";
-											posX = 0;
-											posY = 0;
-											abajo = false;
-											derecha = false;
 											break;
 										}
 									}
@@ -955,7 +1034,7 @@ void inGameJ1() {
 				else if (c > 47 && c < 58) {
 					tempX = tempX + (char)c;
 				}
-				
+
 			}
 
 			break;
@@ -968,17 +1047,19 @@ void inGameJ1() {
 
 bool validarInsercion(string palabra, int x, int y, bool abajo, bool derecha) {
 	bool esCorrecto = true;
-	//bool buscarPalabra = listaPalabras->buscarYconfirmar(palabra);
+	bool unaFicha = false;
+	bool buscarPalabra = listaPalabras->buscarYconfirmar(palabra);
 
-	//if (buscarPalabra == true) {
-	
-	for (int i = 0; i < palabra.length(); i++) {
-		palabra = toupper(palabra[i]);
-	}
-		for (int i = 0; i < palabra.length(); i++) {
+
+
+	if (buscarPalabra == true) {
+		for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+			palabra[indice] = toupper(palabra[indice]);
+		}
+		for (int indice = 0; palabra[indice] != '\0'; ++indice) {
 			nodoFichaActual* fichaAhora = listaFichasJ1->primero;
 			while (fichaAhora != NULL) {
-				if ((char)fichaAhora->letra[0] ==  palabra[i]) {
+				if ((char)fichaAhora->letra[0] == palabra[indice]) {
 					break;
 				}
 				fichaAhora = fichaAhora->siguiente;
@@ -988,16 +1069,59 @@ bool validarInsercion(string palabra, int x, int y, bool abajo, bool derecha) {
 				esCorrecto = false;
 				return esCorrecto;
 			}
-			
-		}
-
-		if (derecha == true && abajo && false) { //Hacia derecha
-			
-		}
-		else if (derecha == false && abajo && true) {//Hacia abajo
 
 		}
-	//}
+
+		if (derecha == true && abajo == false) {
+			int tempX = x;
+			int tempY = y;
+
+			for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+				nodoMatriz* celdaX = tablero->buscarColumna(tempX);
+				nodoMatriz* celdaY = tablero->buscarFila(tempY);
+				tempX++;
+				if (celdaX != NULL && celdaY != NULL) {
+					while (celdaX->y != y) {
+						celdaX = celdaX->abajo;
+					}
+					if ((char)celdaX->letra[0] == palabra[indice]) {
+						unaFicha = true;
+					}
+					else {
+						esCorrecto = false;
+						return esCorrecto;
+					}
+				}
+
+			}
+		}
+		else if (derecha == false && abajo == true) {
+			int tempX = x;
+			int tempY = y;
+
+			for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+				nodoMatriz* celdaX = tablero->buscarColumna(tempX);
+				nodoMatriz* celdaY = tablero->buscarFila(tempY);
+				tempY++;
+				if (celdaX != NULL && celdaY != NULL) {
+					while (celdaY->x != x) {
+						celdaY = celdaY->derecha;
+					}
+					if ((char)celdaY->letra[0] == palabra[indice]) {
+						unaFicha = true;
+					}
+					else {
+						esCorrecto = false;
+						return esCorrecto;
+					}
+				}
+
+			}
+		}
+	}
+	else {
+		esCorrecto == false;
+	}
 
 
 	return esCorrecto;
@@ -1006,13 +1130,20 @@ bool validarInsercion(string palabra, int x, int y, bool abajo, bool derecha) {
 void inGameJ2() {
 	wclear(win);
 	refresh();
-	string entrada = "";
 
-
+	string palabra = "";
+	int posX;
+	int posY;
+	bool derecha = false;
+	bool abajo = false;
 
 
 	mvwprintw(win, 1, 8, "Turno de ");
 	mvwprintw(win, 1, 17, nj2.c_str());
+	mvwprintw(win, 1, 30, "Puntuacion actual: ");
+	mvwprintw(win, 1, 49, to_string(pntJ2).c_str());
+
+
 
 	mvwprintw(win, 3, 8, "LETRAS DISPONIBLES:");
 
@@ -1026,48 +1157,274 @@ void inGameJ2() {
 		posTemporal = posTemporal + 7;
 	}
 
+	mvwprintw(win, 6, 8, "Escribe la palabra que quieres formar: ");
 
-	mvwprintw(win, 13, 8, "N. Terminar Turno");
+
+
+	mvwprintw(win, 13, 8, "6. Terminar Turno");
+	mvwprintw(win, 13, 30, "7. Cambiar Fichas");
 	mvwprintw(win, 15, 8, "8. Rendirse");
 	mvwprintw(win, 15, 23, "9. Reporte de fichas J2");
 
 
-
-	//mvwprintw(win, 13, 8, "7. Regresar");
-
 	wrefresh(win);
+	wmove(win, 7, 8);
 
-	wmove(win, 10, 8);
 
 	while (true) {
 		int c = wgetch(win);
 
-		if (c == 55) {
-
+		if (c == 54) {
+			inGameJ1();
 			break;
+		}
+		else if (c == 56) {
+			nodoPuntos* ganador = new nodoPuntos();
+			ganador->nombre = nj1;
+			ganador->puntuacion = pntJ1;
+			listaScore->insertarPrimero(ganador);
+			menuPrincipal();
+			break;
+		}
+		else if (c == 8) {
+			palabra = palabra.erase(palabra.length() - 1);
 		}
 		else if (c == 57) {//GRAFICAR FICHAS
-			listaFichasJ2->graficar("fichasJ2");
+			listaFichasJ2->graficar("fichasJ2");////////////J2
 			inGameJ2();
 		}
-		else if (c == 110) {//TERMINA EL TURNO
-			inGameJ1();
+		else if (c == 55) {
+			mvwprintw(win, 4, 8, "                                                                                                ");
+			int posTemporal = 8;
+
+			listaFichasJ2->devolverCola(cola);/////// J2 
+			listaFichasJ2 = new listaD();
+			listaFichasJ2->llenar(cola);
+
+			nodoFichaActual* fichaTemporal = listaFichasJ2->primero->siguiente;
+			for (int i = 1; i <= 7; i++) {
+				string tmp = to_string(i) + ". " + fichaTemporal->letra.c_str() + " | ";
+
+				mvwprintw(win, 4, posTemporal, tmp.c_str());
+				fichaTemporal = fichaTemporal->siguiente;
+				posTemporal = posTemporal + 7;
+			}
+			mvwprintw(win, 13, 8, "N. Terminar Turno***");
+			wrefresh(win);
+
+			while (true) {
+				int c = wgetch(win);
+				if (c == 110) {
+					inGameJ2();///////////////////////////Volver a j2
+					break;
+				}
+			}
 
 			break;
 		}
-		else if (c == 13) {//VALIDAR PALABRA
+		else if (c == 54) {//TERMINA EL TURNO
+			inGameJ2();////////////////////////////////////////////////////DEVOLVER A J2
 
-			inGameJ1();
+			break;
+		}
+		else if (c == 13) {
+			/*bool buscarPalabra = listaPalabras->buscarYconfirmar(entrada);
+			cout << buscarPalabra;*/
+			mvwprintw(win, 6, 8, "                                                        ");
+			mvwprintw(win, 6, 8, "Quieres formar la palabra: ");
+			mvwprintw(win, 7, 8, palabra.c_str());
+
+			mvwprintw(win, 9, 8, "Posicion X: ");
+			wmove(win, 9, 20);
+
+			wrefresh(win);
+			string tempX;
+			string tempY;
+
+			while (true) {
+				int c = wgetch(win);
+				if (c == 13) {
+					posX = stoi(tempX);
+					tempX = "";
+					mvwprintw(win, 9, 8, "Posicion X: ");
+					mvwprintw(win, 9, 20, "                                             ");
+					mvwprintw(win, 9, 20, to_string(posX).c_str());
+
+
+					mvwprintw(win, 10, 8, "Posicion Y: ");
+					wrefresh(win);
+					wmove(win, 10, 20);
+
+					while (true) {
+						int c = wgetch(win);
+						if (c == 13) {
+							posY = stoi(tempY);
+							tempY = "";
+							mvwprintw(win, 10, 8, "Posicion Y: ");
+							mvwprintw(win, 10, 20, "                                             ");
+							mvwprintw(win, 10, 20, to_string(posY).c_str());
+
+							mvwprintw(win, 11, 8, "Direccion: ");
+							mvwprintw(win, 12, 8, "(D: Derecha ; A: Abajo)");
+							wrefresh(win);
+							wmove(win, 11, 19);
+
+							while (true) {
+								int c = wgetch(win);
+
+
+								if (c == 97) {//Abajo
+									abajo = true;
+									derecha = false;
+									mvwprintw(win, 11, 19, "                       ");
+									mvwprintw(win, 12, 8, "                                ");
+
+									mvwprintw(win, 11, 19, "Abajo");
+									mvwprintw(win, 13, 8, "N. Terminar Turno***");
+									wrefresh(win);
+									wmove(win, 112, 19);
+
+									while (true) {
+										int c = wgetch(win);
+										if (c == 110) { ///////////VALIDAR PALABRA Y TODO
+											bool validacion = validarInsercion(palabra, posX, posY, abajo, derecha);
+
+											if (validacion == true) {
+												
+												for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+													palabra[indice] = toupper(palabra[indice]);
+													nodoFichaActual* fichaAhora = listaFichasJ2->primero;
+													while (fichaAhora != NULL) {
+														if ((char)fichaAhora->letra[0] == palabra[indice]) {
+															break;
+														}
+														fichaAhora = fichaAhora->siguiente;
+													}
+
+													pntJ2 = pntJ2 + fichaAhora->puntuacion;
+													nodoMatriz* nuevo = new nodoMatriz();
+													nuevo->letra = fichaAhora->letra;
+													nuevo->multiplicador = 1;
+													nuevo->x = posX;
+													nuevo->y = posY;
+
+													tablero->insertar(nuevo);
+													if (derecha == true && abajo == false) {
+														posX++;
+													}
+													else {
+														posY++;
+													}
+
+													fichaAhora->anterior->siguiente = fichaAhora->siguiente;
+													fichaAhora->siguiente->anterior = fichaAhora->anterior;
+													fichaAhora->siguiente == NULL;
+													fichaAhora->anterior == NULL;
+												
+
+												}
+												palabra = "";
+												posX = 0;
+												posY = 0;
+												abajo = false;
+												derecha = false;
+												listaFichasJ2 = new listaD();
+												listaFichasJ2->llenar(cola);
+												inGameJ1();
+											}
+
+											break;
+										}
+									}
+									break;
+
+								}
+								else if (c == 100) {//Derecha
+									derecha = true;
+									abajo = false;
+									mvwprintw(win, 11, 19, "                       ");
+									mvwprintw(win, 12, 8, "                                ");
+									mvwprintw(win, 11, 19, "Derecha");
+									mvwprintw(win, 13, 8, "N. Terminar Turno***");
+									wrefresh(win);
+									wmove(win, 112, 19);
+									while (true) {
+										int c = wgetch(win);
+										if (c == 110) { ///////////VALIDAR PALABRA Y TODO
+											bool validacion = validarInsercion(palabra, posX, posY, abajo, derecha);
+
+											if (validacion == true) {
+												
+												for (int indice = 0; palabra[indice] != '\0'; ++indice) {
+													palabra[indice] = toupper(palabra[indice]);
+													nodoFichaActual* fichaAhora = listaFichasJ2->primero;
+													while (fichaAhora != NULL) {
+														if ((char)fichaAhora->letra[0] == palabra[indice]) {
+															break;
+														}
+														fichaAhora = fichaAhora->siguiente;
+													}
+
+													pntJ2 = pntJ2 + fichaAhora->puntuacion;
+													nodoMatriz* nuevo = new nodoMatriz();
+													nuevo->letra = fichaAhora->letra;
+													nuevo->multiplicador = 1;
+													nuevo->x = posX;
+													nuevo->y = posY;
+
+													tablero->insertar(nuevo);
+													if (derecha == true && abajo == false) {
+														posX++;
+													}
+													else {
+														posY++;
+													}
+
+													fichaAhora->anterior->siguiente = fichaAhora->siguiente;
+													fichaAhora->siguiente->anterior = fichaAhora->anterior;
+													fichaAhora->siguiente == NULL;
+													fichaAhora->anterior == NULL;
+													
+
+												}
+												palabra = "";
+												posX = 0;
+												posY = 0;
+												abajo = false;
+												derecha = false;
+												listaFichasJ2 = new listaD();
+												listaFichasJ2->llenar(cola);
+												inGameJ2();
+											}
+
+											break;
+										}
+									}
+									break;
+								}
+
+							}
+							break;
+
+						}
+						else if (c > 47 && c < 58) {
+							tempY = tempY + (char)c;
+						}
+
+					}
+
+					break;
+				}
+				else if (c > 47 && c < 58) {
+					tempX = tempX + (char)c;
+				}
+
+			}
+
 			break;
 		}
 		else {
-
-
-
-			entrada = entrada + (char)c;
-
-
-
+			palabra = palabra + (char)c;
 		}
 	}
 }

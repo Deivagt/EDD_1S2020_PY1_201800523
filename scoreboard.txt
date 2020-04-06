@@ -1,1 +1,1 @@
- digraph G {node1[label = "felicia: 150"];}
+ digraph G {node1[label = "felicia: 150"];node2[label = "alberto: 95"];node3[label = "alberto: 80"];node4[label = "pepe: 60"];node5[label = "pepe: 20"];node6[label = "abc: 14"];node7[label = "alberto: 1"];node1 -> node2;node2 -> node3;node3 -> node4;node4 -> node5;node5 -> node6;node6 -> node7;}

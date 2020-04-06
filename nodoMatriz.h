@@ -13,7 +13,7 @@ public:
 	nodoMatriz* izquierda;
 	nodoMatriz* derecha;
 
-	char letra;
+	string letra;
 	int multiplicador;
 
 	int x;

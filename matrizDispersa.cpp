@@ -1,5 +1,7 @@
 #include "matrizDispersa.h"
-
+#include <iostream>
+#include <fstream>
+#include<string>
 
 matrizDispersa::matrizDispersa() {
 	raiz = new nodoMatriz();
@@ -169,30 +171,7 @@ nodoMatriz* matrizDispersa::insertarColumna(nodoMatriz* n, nodoMatriz* encabezad
 	}
 	return n;
 }
-/*
-void matrizDispersa::imprimir() {
-	nodoMatriz* temp = this->raiz;
-	nodoMatriz* temp1;
 
-
-	 do{
-		temp1 = temp;
-	//	cout << temp->letra << " " << temp->x << "," << temp->y << endl;
-		 do{
-			temp1 = temp1->derecha;
-			cout << temp1->letra << " " << temp1->x << "," << temp1->y <<"	";
-
-			
-		 } while (temp1->derecha != NULL);
-
-
-		temp = temp->abajo;
-		cout << endl;
-	 } while (temp != NULL);
-
-
-
-}*/
 
 void matrizDispersa::imprimir() {
 	nodoMatriz* temp = this->raiz;
@@ -209,6 +188,113 @@ void matrizDispersa::imprimir() {
 	}
 
 
+
+
+}
+void matrizDispersa::graficar() {
+	string encabezado = " digraph G {";
+
+	nodoMatriz* auxiliar1 = this->raiz;
+	nodoMatriz* auxiliar2 = this->raiz;
+
+
+
+
+
+	string nodos = "";
+	string dir = "";
+	string rank = "";
+
+	while (auxiliar1 != NULL) {
+		auxiliar2 = auxiliar1;
+		rank = rank + "{rank = same;";
+		while (auxiliar2 != NULL)
+		{
+			
+
+			if (auxiliar2->x < 0 && auxiliar2->y < 0) {
+
+				rank = rank + nodos + "nodo" + "raiz" + ";";
+
+				nodos = nodos + "nodo" + "raiz" +
+					+"[label = \"" + auxiliar2->letra + "\"];\n";
+
+				dir = dir + "nodo" + "raiz" + "->" +
+					"nodo" + "x" + to_string(auxiliar2->derecha->x) +
+					" [dir=\"both\",constraint = true];\n";
+
+				dir = dir  +"nodo" + "raiz" + "->" +
+					"nodo" + "y" + to_string(auxiliar2->abajo->y) +
+					" [dir=\"both\"];\n";
+
+			}
+			else if (auxiliar2->x < 0) {
+				rank = rank + "nodo" + "y" + to_string(auxiliar2->y) + ";";
+
+				nodos = nodos + "nodo" + "y" + to_string(auxiliar2->y) +
+					+"[label = \"" + auxiliar2->letra + "\"];\n";
+
+				dir = dir + "nodo"+"y" + to_string(auxiliar2->y) + "->" +
+					"nodo" + "x" + to_string(auxiliar2->derecha->x) + "y" + to_string(auxiliar2->derecha->y) +
+					" [dir=\"both\",constraint = true];\n";
+
+				if (auxiliar2->abajo != NULL) {
+					dir = dir +"nodo"+ "y" + to_string(auxiliar2->y) + "->" +
+						 "y" + to_string(auxiliar2->abajo->y) +
+						" [dir=\"both\"];\n";
+				}
+			}
+			else if (auxiliar2->y < 0) {
+				rank = rank + "nodo" + "x" + to_string(auxiliar2->x) + ";";
+
+				nodos = nodos + "nodo" + "x" + to_string(auxiliar2->x) +
+					+"[label = \"" + auxiliar2->letra + "\"];\n";
+
+				if (auxiliar2->derecha != NULL) {
+					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "->" +
+						"nodo" + "x" + to_string(auxiliar2->derecha->x)  +
+						" [dir=\"both\",constraint = true];\n";
+				}
+					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "->" +
+						"nodo" + "x" + to_string(auxiliar2->abajo->x) + "y" + to_string(auxiliar2->abajo->y) +
+						" [dir=\"both\"];\n";
+				
+			}
+			else {
+				rank = rank + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) + ";";
+				nodos = nodos + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) +
+					+"[label = \"" + auxiliar2->letra + "\"];\n";
+				if (auxiliar2->derecha != NULL) {
+					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) + "->" +
+						"nodo" + "x" + to_string(auxiliar2->derecha->x) + "y" + to_string(auxiliar2->derecha->y) +
+						" [dir=\"both\",constraint = true];\n";
+				}
+				if (auxiliar2->abajo != NULL) {
+					dir = dir + "nodo" + "x" + to_string(auxiliar2->x) + "y" + to_string(auxiliar2->y) + "->" +
+						"nodo" + "x" + to_string(auxiliar2->abajo->x) + "y" + to_string(auxiliar2->abajo->y) +
+						" [dir=\"both\"];\n";
+				}
+			}
+			
+			auxiliar2 = auxiliar2->derecha;
+		}
+		rank = rank + "}";
+		auxiliar1 = auxiliar1->abajo;
+	}
+	
+	string fin = "}";
+	encabezado = encabezado + nodos + dir+rank + fin;
+
+	ofstream file;
+	file.open("matriz.txt", ios::out);
+
+	file << encabezado;
+	file.close();
+
+	string s1 = "dot -Tpng matriz.txt -o D:/grafos/matriz.png";
+
+	system(s1.c_str());
+	system("start D:/grafos/matriz.png");
 
 
 }

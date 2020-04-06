@@ -1,16 +1,2 @@
-﻿  EDD_1S2020_PY1_2018005231.cpp
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(3,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(13,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(14,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(15,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(16,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(17,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(18,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(19,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(20,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(75,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(437,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(975,20): warning C4018: '<': no coinciden signed/unsigned
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(978,21): warning C4018: '<': no coinciden signed/unsigned
-D:\Repositorios\EDD_1S2020_PY1_201800523\EDD_1S2020_PY1_2018005231.cpp(1141,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+﻿  matrizDispersa.cpp
   EDD_1S2020_PY1_2018005231.vcxproj -> D:\Repositorios\EDD_1S2020_PY1_201800523\Debug\EDD_1S2020_PY1_2018005231.exe
