@@ -22,5 +22,6 @@ public:
     nodoPalabra* getUltimo();
     nodoPalabra* buscar(string palabra);
     void graficar();
+    bool buscarYconfirmar(string palabra);
 };
 

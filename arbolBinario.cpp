@@ -8,7 +8,32 @@ arbolBinario::arbolBinario() {
 
 }
 
+bool arbolBinario::buscar(string nombre) {
+	tb = false;
+	bt = nombre;
+	this->bsq(this->raiz);
+	return tb;
+}
+void arbolBinario::bsq(nodoArbol* r) {
+
+	if (r == NULL) {
+		return;
+	}
+
+	if (r->nombre.compare(bt) == 0) {
+		tb = true;
+		return;
+	}
+
+	this->bsq(r->izq);
+	this->bsq(r->der);
+}
+
 bool arbolBinario::insertar(nodoArbol* n) {
+
+	for (int i = 0; i < n->nombre.length(); i++) {
+		n->nombre[i] = tolower(n->nombre[i]);
+	}
 
 	if (raiz == NULL) {
 		n->id = contador;

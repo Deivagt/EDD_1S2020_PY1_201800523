@@ -1,10 +1,6 @@
- digraph G {node0[label = "pepe"];node1[label = "alberto"];node3[label = "felicia"];node0 [ label ="pepe"];
-node1->node3
-node0 [ label ="pepe"];
+ digraph G {node0[label = "alb"];node1[label = "aa"];node0 [ label ="alb"];
 node0->node1
-node2[label = "susy"];node4[label = "xarnold"];node0 [ label ="pepe"];
-node2->node4
-node0 [ label ="pepe"];
+node2[label = "bb"];node0 [ label ="alb"];
 node0->node2
-node0 [ label ="pepe"];
+node0 [ label ="alb"];
 }

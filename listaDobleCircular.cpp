@@ -44,6 +44,20 @@ nodoPalabra* listaDobleCircular::buscar(string palabra) {
 	}
 	return aux;
 }
+bool listaDobleCircular::buscarYconfirmar(string palabra) {
+	nodoPalabra* aux = new nodoPalabra();
+	aux = primero;
+
+	while (aux->siguiente != primero) {
+		aux = aux->siguiente;
+		if (aux->palabra.compare(palabra) == 0) {
+			return true;
+			
+		}
+
+	}
+	return false;
+}
 
 void listaDobleCircular::imprimirDesdeInicio() {
 	nodoPalabra* aux = primero->siguiente;
@@ -98,8 +112,8 @@ void listaDobleCircular::graficar() {
 		aux = aux->siguiente;
 	}
 
-	dir = dir + "node" + to_string(i) + " -> node" + to_string(0) + ";";
-	dir = dir + "node" + to_string(0) + " -> node" + to_string(i) + ";";
+	dir = dir + "node" + to_string(i-1) + " -> node" + to_string(1) + ";";
+	dir = dir + "node" + to_string(1) + " -> node" + to_string(i-1) + ";";
 	//nodos = nodos + "node" + to_string(i) + "[label = \"null\",width=0.5];";
 	//string fi = "node1 ->node0;";
 	string fin = "}";

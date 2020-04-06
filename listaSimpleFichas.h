@@ -16,6 +16,7 @@ public:
     void ordenar();
     void imprimir();
     bool vacio();
+   
     nodoFicha* buscar(int id);
 };
 

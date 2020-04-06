@@ -1,19 +1,24 @@
 #pragma once
 #include <iostream>
 #include "nodoPuntos.h"
+#include "listaSimpleTotal.h"
 using namespace std;
 
 class listaSimplePJugador
 {
-private:
-    nodoPuntos* primero;
-    nodoPuntos* ultimo;
 
 
 public:
+    nodoPuntos* primero;
+    nodoPuntos* ultimo;
+
+    int tamanio;
     listaSimplePJugador();
     void insertarPrimero(nodoPuntos* n);
-    void ordenar();
+    
     void imprimir();
+    void graficar(string nombre, listaSimpleTotal* raices);
+    void ordenar();
+    nodoPuntos* elementAt(int i);
 };
 

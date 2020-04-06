@@ -212,3 +212,4 @@ void listaSimpleFichas::imprimir() {
 		}
 	}
 }
+

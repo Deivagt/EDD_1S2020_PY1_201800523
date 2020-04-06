@@ -1,4 +1,8 @@
 #include "listaD.h"
+#include <iostream>
+#include <fstream>
+#include<string>
+
 
 
 listaD::listaD() {
@@ -29,11 +33,12 @@ void listaD::insertar(char c,nodoFichaActual* temp) {
 }
 
 
-void listaD::insertarUltimo(char c)
+void listaD::insertarUltimo(string c, int puntos)
 {
     nodoFichaActual* aux = new nodoFichaActual();
     aux->letra = c;
     aux->id = indice;
+    aux->puntuacion = puntos;
     indice++;
     aux->siguiente = ultimo;
     aux->anterior = ultimo->anterior;
@@ -106,6 +111,16 @@ void listaD::imprimir() {
     }
 }
 
+
+
+void listaD::llenar(colaFichas* c) {
+    for (int i = 0; i < 7;i++) {
+        nodoFicha* temp = c->sacarUltimo();
+        this->insertarUltimo(temp->letra,temp->puntuacion);
+    }
+
+}
+/*
 void listaD::buscar(string s) {
 
     char buffer[100];
@@ -152,7 +167,74 @@ void listaD::buscar(string s) {
     }
 
 }
+*/
 
+
+
+void listaD::graficar(string nombre) {
+    string encabezado = " digraph G {";
+
+    encabezado = encabezado + "rankdir=LR;";
+
+
+
+    nodoFichaActual* aux = this->primero->siguiente;
+
+    int i = 1;
+    string nodos = "";
+    string dir = "";
+
+    while (aux != this->ultimo) {
+
+        nodos = nodos + "node" + to_string(i) + "[label = \"" + aux->letra + "\"];";
+        if (aux->anterior == this->primero) {
+            dir = dir + "node" + to_string(i) + " -> node" + to_string(i + 1) + ";";
+        }
+        else if (aux->siguiente == this->ultimo) {
+            dir = dir + "node" + to_string(i) + " -> node" + to_string(i - 1) + ";";
+        }
+        else {
+            dir = dir + "node" + to_string(i) + " -> node" + to_string(i - 1) + ";";
+
+            dir = dir + "node" + to_string(i) + " -> node" + to_string(i + 1) + ";";
+        }
+
+
+        i = i + 1;
+        aux = aux->siguiente;
+    }
+
+
+    string fin = "}";
+    encabezado = encabezado + nodos + dir + fin;
+
+    ofstream file;
+    file.open(nombre+".txt", ios::out);
+
+    file << encabezado;
+    file.close();
+
+    string s1 = "dot -Tpng "+ nombre+".txt -o D:/grafos/"+ nombre+".png";
+    string start = "start D:/grafos/" + nombre + ".png";
+    system(s1.c_str());
+    system(start.c_str());
+
+
+
+}
+
+void listaD::devolverCola(colaFichas* c) {
+    nodoFichaActual* temp = this->primero->siguiente;
+
+    while (temp != this->ultimo) {
+        nodoFicha* old = new nodoFicha();
+        old->letra = temp->letra;
+        old->puntuacion = temp->puntuacion;
+        c->insertarPrimero(old);
+        temp = temp->siguiente;
+    }
+
+}
 /*
 int listaD::reemplazar(string b, string r) {
     char buffer[100];

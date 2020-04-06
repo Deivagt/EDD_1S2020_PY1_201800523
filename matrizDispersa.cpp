@@ -169,9 +169,9 @@ nodoMatriz* matrizDispersa::insertarColumna(nodoMatriz* n, nodoMatriz* encabezad
 	}
 	return n;
 }
-
+/*
 void matrizDispersa::imprimir() {
-	nodoMatriz* temp = this->raiz->abajo;
+	nodoMatriz* temp = this->raiz;
 	nodoMatriz* temp1;
 
 
@@ -180,14 +180,34 @@ void matrizDispersa::imprimir() {
 	//	cout << temp->letra << " " << temp->x << "," << temp->y << endl;
 		 do{
 			temp1 = temp1->derecha;
-			cout << temp1->letra << " " << temp1->x << "," << temp1->y << endl;
+			cout << temp1->letra << " " << temp1->x << "," << temp1->y <<"	";
 
 			
 		 } while (temp1->derecha != NULL);
 
 
 		temp = temp->abajo;
+		cout << endl;
 	 } while (temp != NULL);
+
+
+
+}*/
+
+void matrizDispersa::imprimir() {
+	nodoMatriz* temp = this->raiz;
+	nodoMatriz* temp1;
+
+	while (temp != NULL) {
+		temp1 = temp;
+		while (temp1 != NULL) {
+			cout << temp1->letra << "|" << temp1->x << "," << temp1->y << "	";
+			temp1 = temp1->derecha;
+		}
+		temp = temp->abajo;
+		cout << endl;
+	}
+
 
 
 

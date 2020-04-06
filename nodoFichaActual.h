@@ -7,7 +7,7 @@ class nodoFichaActual
 {
 public:
 	int puntuacion;
-	char letra;
+	string letra;
 	int cantidad;
 	int id;
 	
