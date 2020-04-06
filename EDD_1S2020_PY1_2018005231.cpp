@@ -63,67 +63,7 @@ void inGameJ2();
 bool validarInsercion(string palabra, int x, int y, bool abajo, bool derecha);
 void iniciarCola();
 
-int main() {
-	//iniciarEstructuras();
 
-	iniciarEstructuras();
-	initscr();
-	refresh();
-	cbreak();
-	raw();
-
-	srand(time(NULL));
-
-	constexpr int str_length = 11;
-
-	constexpr int min_width = 13;
-	constexpr int min_height = 3;
-	constexpr int min_x = 0;
-	constexpr int min_y = 0;
-
-	int xMax, yMax;
-
-	getmaxyx(stdscr, yMax, xMax);
-
-	box(stdscr, 0, 0);
-
-	int x = 0;
-	int y = 0;
-
-	win = newwin(yMax - 3, xMax - 3, 1, 1);
-
-	refresh();
-	wrefresh(win);
-
-	keypad(win, true);
-
-	precargar();
-	//tablero->imprimir();
-
-	nj1 = "abc";
-	nj2 = "def";
-
-	listaFichasJ1->llenar(cola);
-	listaFichasJ2->llenar(cola);
-
-
-
-	nodoMatriz* nuevo = new nodoMatriz();
-	nuevo->letra = "M";
-	nuevo->x = 5;
-	nuevo->y = 5;
-	nuevo->multiplicador = 2;
-	tablero->insertar(nuevo);
-
-	tablero->graficar();
-	//inGameJ1();
-
-	endwin();
-
-	return 0;
-}
-
-/*
 int main()
 {
 	iniciarEstructuras();
@@ -164,7 +104,7 @@ int main()
 	return 0;
 
 }
-*/
+
 void menuPrincipal() {
 	pntJ1 = 0;
 	pntJ2 = 0;
@@ -744,6 +684,7 @@ void errorIni() {
 }
 
 void inGameJ1() {
+	tablero->graficar();
 	wclear(win);
 	refresh();
 
@@ -1128,6 +1069,7 @@ bool validarInsercion(string palabra, int x, int y, bool abajo, bool derecha) {
 }
 
 void inGameJ2() {
+	tablero->graficar();
 	wclear(win);
 	refresh();
 
